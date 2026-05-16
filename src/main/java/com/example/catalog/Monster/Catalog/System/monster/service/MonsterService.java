@@ -1,5 +1,6 @@
 package com.example.catalog.Monster.Catalog.System.monster.service;
 
+import com.example.catalog.Monster.Catalog.System.monster.dto.MonsterUpdateDto;
 import com.example.catalog.Monster.Catalog.System.monster.model.Monster;
 import com.example.catalog.Monster.Catalog.System.monster.model.enums.MonsterStatusEnum;
 import com.example.catalog.Monster.Catalog.System.monster.repository.IMonsterRepository;
@@ -28,12 +29,14 @@ public class MonsterService {
         return monsterRepository.save(monster);
     }
 
-    public Optional<Monster> updateMonster(Long id, Monster newMonster) {
+    public Optional<Monster> updateMonster(Long id, MonsterUpdateDto dto) {
         return monsterRepository.findById(id).map(existing -> {
-            newMonster.setId(id);
-            newMonster.setSightingCount(existing.getSightingCount());
-            newMonster.setStatus(existing.getStatus());
-            return monsterRepository.save(newMonster);
+            existing.setName(dto.getName());
+            existing.setRegionId(dto.getRegionId());
+            existing.setThreatLevel(dto.getThreatLevel());
+            existing.setDescription(dto.getDescription());
+            existing.setAbilities(dto.getAbilities());
+            return monsterRepository.save(existing);
         });
     }
 

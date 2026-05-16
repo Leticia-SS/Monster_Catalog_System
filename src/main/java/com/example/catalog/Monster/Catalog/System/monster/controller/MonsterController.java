@@ -1,0 +1,57 @@
+package com.example.catalog.Monster.Catalog.System.monster.controller;
+
+import com.example.catalog.Monster.Catalog.System.monster.dto.MonsterUpdateDto;
+import com.example.catalog.Monster.Catalog.System.monster.model.Monster;
+import com.example.catalog.Monster.Catalog.System.monster.model.enums.MonsterStatusEnum;
+import com.example.catalog.Monster.Catalog.System.monster.service.MonsterService;
+import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@AllArgsConstructor
+@RequestMapping("/monsters")
+public class MonsterController {
+    private final MonsterService monsterService;
+
+    @GetMapping
+    public ResponseEntity<List<Monster>> listAllMonsters() {
+        return ResponseEntity.ok(monsterService.getAllMonsters());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getMonsterById(@PathVariable Long id) {
+        return monsterService.getMonsterById(id).<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: monstro não encontrado"));
+    }
+
+    @PostMapping
+    public ResponseEntity<Monster> addMonster(@RequestBody Monster monster) {
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(monsterService.addMonster(monster));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateMonster(@PathVariable Long id, @RequestBody MonsterUpdateDto dto) {
+        return monsterService.updateMonster(id, dto).<ResponseEntity<?>>map(ResponseEntity::ok)
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro: monstro não encontrado"));
+    }
+
+    @GetMapping("/category/{categoryId}")
+    public ResponseEntity<List<Monster>> getMonsterByCategory(@PathVariable Long categoryId) {
+        return ResponseEntity.ok(monsterService.getMonstersByCategory(categoryId));
+    }
+
+    @GetMapping("status/{status}")
+    public ResponseEntity<?> getMonsterByStatus(@PathVariable MonsterStatusEnum status) {
+        return ResponseEntity.ok(monsterService.getMonstersByStatus(status));
+    }
+
+
+
+
+
+}
