@@ -17,9 +17,7 @@ public class Monster {
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @ManyToOne
-    @JoinColumn(name = "region_id", nullable = false)
-    private Region region;
+    private Long regionId;
     @Column(name = "threat_level")
     private Integer threatLevel;
     @Enumerated(EnumType.STRING)
@@ -28,5 +26,6 @@ public class Monster {
     private String description;
     @Column(columnDefinition = "TEXT")
     private String abilities;
+    private Integer sightingCount = 0;
 
 }
