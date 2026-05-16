@@ -45,11 +45,16 @@ public class MonsterController {
         return ResponseEntity.ok(monsterService.getMonstersByCategory(categoryId));
     }
 
-    @GetMapping("status/{status}")
-    public ResponseEntity<?> getMonsterByStatus(@PathVariable MonsterStatusEnum status) {
-        return ResponseEntity.ok(monsterService.getMonstersByStatus(status));
+    @GetMapping("/status/{status}")
+    public ResponseEntity<?> getMonsterByStatus(@PathVariable String status) {
+        try {
+            MonsterStatusEnum statusEnum = MonsterStatusEnum.valueOf(status.toUpperCase());
+            return ResponseEntity.ok(monsterService.getMonstersByStatus(statusEnum));
+        } catch (IllegalArgumentException er) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Erro: status invpalido. Valores possíveis: COMMON, RARE e EXTINCT");
+        }
     }
-
 
 
 
