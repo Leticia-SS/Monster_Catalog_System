@@ -1,0 +1,14 @@
+package com.example.catalog.Monster.Catalog.System.monster.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Data
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "category", schema = "monster")
+public class Category {
+    @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+}
