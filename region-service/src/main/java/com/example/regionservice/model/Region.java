@@ -1,6 +1,6 @@
 package com.example.regionservice.model;
 
-import com.example.regionservice.model.enums.EnvironmentTypeEnum;
+import com.example.regionservice.model.enums.EnvironmentTypeRnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -17,7 +17,7 @@ public class Region {
     private String name;
     @Enumerated(EnumType.STRING)
     @Column(name = "environment_type")
-    private EnvironmentTypeEnum environmentType;
+    private EnvironmentTypeRnum environmentType;
     @Column(name = "danger_level")
     @Min(1)@Max(10)
     private Integer dangerLevel;
