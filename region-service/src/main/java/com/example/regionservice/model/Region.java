@@ -10,7 +10,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "regions", schema = "region")
+@Table(name = "regions")
 public class Region {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

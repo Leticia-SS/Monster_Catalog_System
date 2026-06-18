@@ -8,7 +8,7 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "sightings", schema = "region")
+@Table(name = "sightings")
 public class Sighting {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
