@@ -27,6 +27,15 @@ services:
       timeout: 10s
       retries: 10
 
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.13.0
+    container_name: monster-logstash
+    ports:
+      - "5001:5000"
+      - "9600:9600"
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+
   kafka-ui:
     image: provectuslabs/kafka-ui:latest
     container_name: monster-kafka-ui
