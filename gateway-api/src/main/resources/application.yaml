@@ -7,24 +7,17 @@ spring:
       server:
         webmvc:
           routes:
-            - id: user-service
-              uri: lb://USER-SERVICE
+            - id: monster-service
+              uri: lb://MONSTER-SERVICE
               predicates:
-                - Path=/api/users/**
+                - Path=api/monsters/**,/categories/**
               filters:
                 - StripPrefix=1
 
-            - id: arena-service-characters
-              uri: lb://ARENA-SERVICE
+            - id: region-service
+              uri: lb://REGION-SERVICE
               predicates:
-                - Path=/api/characters/**
-              filters:
-                - StripPrefix=1
-
-            - id: arena-service-matches
-              uri: lb://ARENA-SERVICE
-              predicates:
-                - Path=/api/matches/**
+                - Path=api/regions/**,/sightings/**
               filters:
                 - StripPrefix=1
 
@@ -34,7 +27,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 server:
-  port: 8085
+  port: 8083
 
 management:
   endpoints:
