@@ -9,7 +9,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "monsters", schema = "monster")
+@Table(name = "monsters")
 public class Monster {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

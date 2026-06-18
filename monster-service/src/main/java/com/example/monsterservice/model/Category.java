@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "category", schema = "monster")
+@Table(name = "category")
 public class Category {
     @Id@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
