@@ -1,0 +1,8 @@
+20:14:53 [] INFO  REQUEST_LOGGER - GET /monsters = listando todos os monstros
+20:14:56 [] INFO  REQUEST_LOGGER - GET /monsters/1 = listando monstro por Id
+20:15:00 [] INFO  REQUEST_LOGGER - GET /monsters/4 = listando monstro por Id
+20:15:04 [] INFO  REQUEST_LOGGER - GET /monsters/7 = listando monstro por Id
+20:15:09 [] INFO  REQUEST_LOGGER - GET /monsters/33 = listando monstro por Id
+20:15:12 [] INFO  REQUEST_LOGGER - GET /monsters/3 = listando monstro por Id
+20:15:14 [] INFO  REQUEST_LOGGER - GET /monsters/category/4 = buscando monstros por categoria
+20:15:59 [] INFO  REQUEST_LOGGER - GET /monsters/status/RARE = buscando monstros por status
