@@ -7,7 +7,7 @@ spring:
       server:
         webmvc:
           routes:
-            - id: monster-service-monsters
+            - id: monster-service
               uri: lb://MONSTER-SERVICE
               predicates:
                 - Path=/api/monsters/**
@@ -21,7 +21,7 @@ spring:
               filters:
                 - StripPrefix=1
 
-            - id: region-service-regions
+            - id: region-service
               uri: lb://REGION-SERVICE
               predicates:
                 - Path=/api/regions/**

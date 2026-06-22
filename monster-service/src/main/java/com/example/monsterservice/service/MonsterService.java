@@ -1,8 +1,11 @@
 package com.example.monsterservice.service;
 
+import com.example.monsterservice.dto.MonsterCreateDto;
 import com.example.monsterservice.dto.MonsterUpdateDto;
+import com.example.monsterservice.model.Category;
 import com.example.monsterservice.model.Monster;
 import com.example.monsterservice.model.enums.MonsterStatusEnum;
+import com.example.monsterservice.repository.ICategoryRepository;
 import com.example.monsterservice.repository.IMonsterRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +17,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class MonsterService {
     private final IMonsterRepository monsterRepository;
+    private final ICategoryRepository categoryRepository;
 
     public List<Monster> getAllMonsters() {
         return monsterRepository.findAll();
@@ -23,9 +27,18 @@ public class MonsterService {
         return monsterRepository.findById(id);
     }
 
-    public Monster addMonster(Monster monster) {
+    public Monster addMonster(MonsterCreateDto dto) {
+
+        Category category = categoryRepository.findById(dto.getCategoryId())
+                .orElseThrow(() -> new IllegalArgumentException("Categoria não encontrada"));
+
+        Monster monster = new Monster();
+        monster.setName(dto.getName());
+        monster.setDescription(dto.getDescription());
+        monster.setCategory(category);
         monster.setSightingCount(0);
         monster.setStatus(MonsterStatusEnum.EXTINCT);
+
         return monsterRepository.save(monster);
     }
 
