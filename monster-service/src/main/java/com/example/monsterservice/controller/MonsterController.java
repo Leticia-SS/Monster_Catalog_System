@@ -1,6 +1,7 @@
 package com.example.monsterservice.controller;
 
 
+import com.example.monsterservice.dto.MonsterCreateDto;
 import com.example.monsterservice.dto.MonsterUpdateDto;
 import com.example.monsterservice.model.Monster;
 import com.example.monsterservice.model.enums.MonsterStatusEnum;
@@ -35,10 +36,16 @@ public class MonsterController {
     }
 
     @PostMapping
-    public ResponseEntity<Monster> addMonster(@RequestBody Monster monster) {
-        logger.info("POST /monsters = cadastrando novo monstro: {}", monster.getName());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(monsterService.addMonster(monster));
+    public ResponseEntity<?> addMonster(@RequestBody MonsterCreateDto dto) {
+        logger.info("POST /monsters = cadastrando novo monstro: {}", dto.getName());
+
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(monsterService.addMonster(dto));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
@@ -62,7 +69,7 @@ public class MonsterController {
             return ResponseEntity.ok(monsterService.getMonstersByStatus(statusEnum));
         } catch (IllegalArgumentException er) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Erro: status invpalido. Valores possíveis: COMMON, RARE e EXTINCT");
+                    .body("Erro: status invalido. Valores possíveis: COMMON, RARE e EXTINCT");
         }
     }
 

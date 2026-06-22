@@ -20,7 +20,8 @@ public class Sighting {
     @Column(name = "sighting_date")
     private LocalDate sightingDate;
     private Integer quantity;
-
+    @Column(columnDefinition = "TEXT")
+    private String notes;
 
 
 }
